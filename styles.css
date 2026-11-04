@@ -1,0 +1,112 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  --paper: #f5f7f1;
+  --ink: #25392f;
+  --muted: #58695c;
+  --line: #d7dfcf;
+  --accent: #30664b;
+  --tint: #e2ebda;
+  --secondary: #a16732;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-underline-offset: .25em; }
+a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+::selection { background: var(--tint); }
+.page { display: grid; grid-template-columns: 180px minmax(0, 640px); column-gap: clamp(32px, 6vw, 80px); max-width: 1000px; margin: auto; padding: clamp(32px, 6vw, 80px) clamp(20px, 4vw, 40px) 32px; }
+.site-header { align-self: start; position: sticky; top: 60px; }
+.wordmark { display: block; font-size: 18px; font-weight: 650; text-decoration: none; margin-bottom: 32px; }
+nav { display: flex; flex-direction: column; gap: 6px; border-left: 1px solid var(--line); }
+nav a { min-height: 44px; display: flex; align-items: center; padding: 10px 16px; font-size: 14px; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; }
+nav a:hover, nav a:focus-visible { border-left-color: var(--accent); background: var(--tint); color: var(--accent); }
+main { min-width: 0; overflow-wrap: anywhere; }
+section { scroll-margin-top: 40px; }
+h1 { font-size: clamp(28px, 4vw, 36px); line-height: 1.2; letter-spacing: -.04em; font-weight: 600; margin: 0 0 20px; }
+.intro { font-size: 16px; line-height: 1.8; margin: 0; }
+.hero { padding-bottom: 48px; }
+.section { border-top: 1px solid var(--line); padding: 36px 0; }
+h2 { font-size: 20px; letter-spacing: -.02em; font-weight: 600; margin: 0 0 28px; }
+.role { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 24px; }
+.role + .role { margin-top: 32px; }
+.role-date { font-size: 12px; line-height: 1.7; color: var(--muted); margin: 0; }
+.role-company { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+h3 { font-size: 16px; font-weight: 600; margin: 0 0 10px; }
+.text-link { font-size: 14px; display: inline-flex; align-items: center; min-height: 44px; }
+footer { grid-column: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 20px; font-size: 12px; color: var(--muted); }
+footer a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.skip-link { position: absolute; left: 16px; top: -80px; padding: 12px; background: var(--paper); z-index: 2; }
+.skip-link:focus { top: 16px; }
+
+.wordmark, h1, .text-link { color: var(--accent); }
+h1::before { content: ""; display: block; width: 36px; height: 4px; background: var(--secondary); margin-bottom: 20px; }
+h2 { color: var(--accent); }
+.role-company { color: var(--accent); }
+nav { border-left-color: var(--accent); }
+
+.role h4 { font-size: 13px; font-weight: 600; line-height: 1.6; margin: 24px 0 8px; }
+.role-details { padding-left: 18px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.role-details li + li { margin-top: 8px; }
+.role-details li::marker { color: var(--accent); }
+
+/* Keep the sidebar on larger screens; reclaim reading space on phones. */
+@media (max-width: 900px) {
+  .page { grid-template-columns: 150px minmax(0, 1fr); }
+  .role { grid-template-columns: 1fr; gap: 10px; }
+  .role + .role { margin-top: 40px; }
+}
+@media (max-width: 600px) {
+  .page { display: block; padding: 24px 20px; }
+  .site-header { position: static; margin-bottom: 36px; }
+  .wordmark { margin-bottom: 16px; }
+  nav { flex-direction: row; flex-wrap: wrap; gap: 4px; border-left: 0; border-bottom: 1px solid var(--line); }
+  nav a { justify-content: center; margin-left: 0; padding: 10px 14px; border-left: 0; border-bottom: 2px solid transparent; }
+  nav a:hover, nav a:focus-visible { border-bottom-color: var(--accent); }
+  .hero { padding-bottom: 32px; }
+  .section { padding: 28px 0; }
+  .role-details { font-size: 15px; }
+  .role h4 { font-size: 14px; }
+  section { scroll-margin-top: 24px; }
+  footer { align-items: center; }
+}
+
+/* A more generous reading layout for laptops and larger monitors. */
+@media (min-width: 1100px) {
+  .page {
+    max-width: 1320px;
+    grid-template-columns: 200px minmax(0, 1fr);
+    column-gap: clamp(72px, 7vw, 112px);
+    padding: 88px 56px 40px;
+  }
+  .site-header { top: 64px; padding-top: 8px; }
+  .wordmark { font-size: 21px; margin-bottom: 40px; }
+  nav a { font-size: 15px; padding: 12px 20px; }
+  .hero { padding-bottom: 64px; }
+  h1 { font-size: clamp(42px, 3.4vw, 54px); margin-bottom: 24px; }
+  h1::before { width: 48px; margin-bottom: 28px; }
+  .intro { max-width: 58ch; font-size: 20px; line-height: 1.7; }
+  .section { padding: 48px 0; }
+  h2 { font-size: 25px; margin-bottom: 40px; }
+  .role { grid-template-columns: 160px minmax(0, 1fr); gap: 32px; }
+  .role + .role { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); }
+  .role-date { font-size: 13px; padding-top: 2px; }
+  .role-company { font-size: 15px; margin-bottom: 10px; }
+  h3 { font-size: 21px; line-height: 1.4; margin-bottom: 16px; }
+  .role h4 { font-size: 15px; margin-top: 28px; }
+  .role-details { font-size: 16px; line-height: 1.75; }
+  .role-details li + li { margin-top: 10px; }
+  .text-link { font-size: 16px; }
+  footer { align-items: center; font-size: 13px; }
+}
+
+.project-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.project-heading h3 { margin: 0; }
+.project-heading .text-link { gap: 6px; }
+.project-description { margin: 8px 0 24px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+.project-preview { margin: 0; }
+.project-preview a { display: block; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.project-preview img { display: block; width: 100%; height: auto; }
+.project-preview figcaption { margin-top: 12px; font-size: 12px; color: var(--muted); }
