@@ -1,0 +1,10 @@
+{
+  "name": "samargt-homepage",
+  "private": true,
+  "scripts": {
+    "check": "html-validate --preset standard,a11y index.html"
+  },
+  "devDependencies": {
+    "html-validate": "11.21.0"
+  }
+}

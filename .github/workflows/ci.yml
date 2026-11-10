@@ -1,0 +1,37 @@
+name: Site checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Validate HTML and accessibility rules
+        run: npm run check
+      - name: Check local links, anchors and assets
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --include-fragments --no-progress index.html
+          fail: true
+      - name: Check GitHub Pages entry files
+        run: |
+          test -f .nojekyll
+          test -s index.html
+          test -s styles.css

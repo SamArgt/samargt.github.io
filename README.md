@@ -1,6 +1,6 @@
 # Samuel A.’s homepage
 
-A professional homepage focused on introduction, experience, and side projects. Plain HTML and CSS, with no build step or runtime dependencies.
+A professional homepage focused on introduction, experience, education, and side projects. Plain HTML and CSS, with no build step or runtime dependencies.
 
 ## Preview
 
@@ -8,9 +8,11 @@ Open `index.html` directly in a browser. All styles and assets use relative path
 
 ## Structure
 
-- `index.html` — introduction, career timeline, and contact links.
+- `index.html` — introduction, career timeline, education, projects, and contact links.
 - `styles.css` — responsive layout, typography, and colors.
 - `assets/favicon.svg` — site icon.
+- `assets/*-preview.jpg` — screenshots of the homelab and MSc research sites.
+- `.github/workflows/` — source checks and a post-deployment smoke check.
 - `.nojekyll` — serve the static files directly on GitHub Pages.
 
 ## Content checklist
@@ -21,8 +23,25 @@ The introduction and experience are based on the supplied résumé. The site use
 - Review the introduction, roles, dates, and contributions.
 - Add email or LinkedIn contact links if desired.
 
-Keep experience in reverse chronological order. Duplicate a `.role` article for each additional position. The side-projects section features Auto Bean. Its screenshot (`assets/auto-bean-ui.png`) comes from the Auto Bean repository’s import review prototype and uses synthetic demo data.
+Keep experience in reverse chronological order. Duplicate a `.role` article for each additional position. The side-projects section starts with a retrospective of my first homelab, followed by Auto Bean. The brief education section links to my MSc audio source separation project under Imperial College London.
+
+The homelab and research previews were captured from [My Homelab](https://my-homelab.vercel.app/) and [AudioSourceSep](https://samargt.github.io/AudioSourceSep/) on 10 November 2026. Auto Bean’s screenshot (`assets/auto-bean-ui.png`) comes from its import review prototype and uses synthetic demo data. Keep image dimensions and alt text up to date when replacing previews.
+
+## Checks
+
+The site has no runtime dependencies or build step. Node.js 24 is used only for development checks:
+
+```sh
+npm ci
+npm run check
+```
+
+The **Site checks** workflow runs on pushes, pull requests and manual dispatch. It validates HTML and accessibility rules, checks local links, fragment anchors and assets with Lychee, and verifies the GitHub Pages entry files. External links are excluded from the source check to avoid failures caused by third-party availability.
+
+The **Deployment check** workflow runs after a successful `pages-build-deployment` run on `main`, or manually. It checks the published homepage title and the CSS, favicon and preview assets. Run it manually only once these changes have been published. It checks availability, not whether the deployed content matches a particular commit.
 
 ## Hosting
 
 This repository contains the static site at its root, ready for GitHub Pages. GitHub Pages publishes from the root of the `main` branch at https://samargt.github.io/. Push updates to `main` to publish changes.
+
+Source checks do not gate the existing branch-based Pages deployment. To require passing checks before merging, make **Site checks / check** a required status check in the repository’s branch protection settings.
