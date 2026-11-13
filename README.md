@@ -40,6 +40,12 @@ The **Site checks** workflow runs on pushes, pull requests and manual dispatch. 
 
 The **Deployment check** workflow runs after a successful `pages-build-deployment` run on `main`, or manually. It checks the published homepage title and the CSS, favicon and preview assets. Run it manually only once these changes have been published. It checks availability, not whether the deployed content matches a particular commit.
 
+## Dependency updates
+
+[`renovate.json`](renovate.json) configures Renovate to open dependency update pull requests on Fridays from midnight until noon in the `Europe/Paris` timezone. It uses the recommended preset to track npm dependencies and GitHub Actions, enables weekly lockfile maintenance during the same window, and leaves automerge disabled. Review and merge updates after **Site checks** passes.
+
+To activate it, enable the [Renovate GitHub App](https://github.com/apps/renovate) for this repository and merge the configuration into `main`. The hosted app runs Renovate; no additional workflow or repository token is needed. See the [Renovate onboarding documentation](https://docs.renovatebot.com/getting-started/installing-onboarding/) for setup details.
+
 ## Hosting
 
 This repository contains the static site at its root, ready for GitHub Pages. GitHub Pages publishes from the root of the `main` branch at https://samargt.github.io/. Push updates to `main` to publish changes.
