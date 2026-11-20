@@ -1,6 +1,6 @@
 # Samuel A.’s homepage
 
-A professional homepage focused on introduction, experience, education, and side projects. Plain HTML and CSS, with no build step or runtime dependencies.
+A professional homepage with Home, Experience, and Projects tabs. Plain HTML and CSS, plus a small script for the tab state and dark mode toggle. No build step or runtime dependencies.
 
 ## Preview
 
@@ -8,8 +8,10 @@ Open `index.html` directly in a browser. All styles and assets use relative path
 
 ## Structure
 
-- `index.html` — introduction, career timeline, education, projects, and contact links.
-- `styles.css` — responsive layout, typography, and colors.
+- `index.html` — Home (portrait, current role, bio, highlighted projects), Experience, Education, and Projects.
+- `styles.css` — responsive layout, typography, and light and dark colors.
+- `site.js` — keeps the open tab in the URL, and stores the dark mode choice.
+- `assets/portrait.jpg` — illustrated portrait.
 - `assets/favicon.svg` — site icon.
 - `assets/*-preview.jpg` — screenshots of the homelab and MSc research sites.
 - `.github/workflows/` — source checks and a post-deployment smoke check.
@@ -17,7 +19,7 @@ Open `index.html` directly in a browser. All styles and assets use relative path
 
 ## Content checklist
 
-The introduction and experience are based on the supplied résumé. The site uses the Forest palette. Before publishing:
+The introduction and experience are based on the supplied résumé. The site uses a blue palette, with a dark theme that follows the system setting until the sidebar toggle sets an explicit choice. Home highlights my-homelab and Auto Bean; that list matches the projects tab for now and can diverge later. Experience and education are separate tabs. Before publishing:
 
 - Confirm the display name and page description.
 - Review the introduction, roles, dates, and contributions.
@@ -38,7 +40,7 @@ npm run check
 
 The **Site checks** workflow runs on pushes, pull requests and manual dispatch. It validates HTML and accessibility rules, checks local links, fragment anchors and assets with Lychee, and verifies the GitHub Pages entry files. External links are excluded from the source check to avoid failures caused by third-party availability.
 
-The **Deployment check** workflow runs after a successful `pages-build-deployment` run on `main`, or manually. It checks the published homepage title and the CSS, favicon and preview assets. Run it manually only once these changes have been published. It checks availability, not whether the deployed content matches a particular commit.
+The **Deployment check** workflow runs after a successful `pages-build-deployment` run on `main`, or manually. It checks the published homepage title and the CSS, script, favicon, portrait and preview assets. Run it manually only once these changes have been published. It checks availability, not whether the deployed content matches a particular commit.
 
 ## Dependency updates
 

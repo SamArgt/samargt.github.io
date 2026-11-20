@@ -35,3 +35,4 @@ jobs:
           test -f .nojekyll
           test -s index.html
           test -s styles.css
+          test -s site.js
